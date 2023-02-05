@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Task 5 | Homework 2</title>
+</head>
+
+<body>
+  <!--
+Обязательное задание.
+
+Необходимо скопировать и вставить в данный скрипт все функции из 4 задания.
+Необходимо реализовать функцию:
+mathOperation(arg1, arg2, operation);
+Параметры:
+arg1 - первое число.
+arg2 - второе число.
+operation - строка, которая содержит один символ из: "+", "-", "*", "/".
+Функция mathOperation должна вернуть результат операции, который был передан в
+параметр operation для двух первых аргументов (arg1 и arg2).
+Функция mathOperation должна использовать для вычисления функции из 4 задания.
+
+Примеры вызова функции:
+console.log(mathOperation(5, 3, "+")); // 8
+console.log(mathOperation(5, 3, ":)")); // NaN
+
+Функции mathOperation всегда передаются корректные числа, проверки на NaN,
+Infinity делать не нужно, однако, в случае если был передан некорректный
+аргумент в параметр operation, необходимо вернуть NaN.
+
+Необходимо для всех функций прописать комментарии jsdoc https://jsdoc.app/.
+-->
+  <script>
+    "use strict";
+
+    /** Returns sum of two elements */
+    function sum(a, b) {
+      return a + b;
+    }
+
+    /** Returns difference of two numbers
+     * (max - min) or 0
+    */
+    function sub(a, b) {
+      return Math.max(a, b) - Math.min(a, b);
+    }
+
+    /** Returns multiply of 2 numbers */
+    function mul(a, b) {
+      return a * b;
+    }
+
+    /** Returns quotient of two numbers */
+    function div(a, b) {
+      return a / b;
+    }
+
+    /** Choose math operation for two numbers
+     * Returns result or NaN if operator is incorrect
+    */
+    function mathOperation(a, b, op) {
+      switch (op) {
+        case '+':
+          console.log(sum(a, b));
+          break;
+        case '-':
+          console.log(sub(a, b));
+          break;
+        case '*':
+          console.log(mul(a, b));
+          break;
+        case '/':
+          console.log(div(a, b));
+          break;
+        default:
+          console.log(NaN);
+      }
+    }
+
+    for (const operator of ['+', '-', '*', '/', ':)']) {
+      mathOperation(5, 3, operator);
+    }
+  // Здесь пишем решение, данный комментарий необходимо стереть.
+  </script>
+</body>
+
+</html>
