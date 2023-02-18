@@ -25,7 +25,7 @@
 
                 <span class="cartIconWrap">
                     <img class="cartIcon" src="images/cart.png" alt="">
-                    <span id="cartQty">5</span>
+                    <span id="cartQty">0</span>
                 </span>
             </div>
         </div>
@@ -406,6 +406,32 @@
         </div>
     </div>
 
+    <template id="cartBox">
+        <div class="cartItems">
+            <table>
+                <thead>
+                    <tr class="trow">
+                        <th class="titem">Название</th>
+                        <th class="titem">Количество</th>
+                        <th class="titem">Цена</th>
+                        <th class="titem">Итого</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                    <th colspan="4">Товаров в корзине на сумму $<span id="total">0</span></th>
+                </tfoot>
+            </table>
+        </div>
+    </template>
+    <template id="cartRow">
+        <tr class="trow">
+            <th class="titem name"></th>
+            <th class="titem quantity"></th>
+            <th class="titem price"></th>
+            <th class="titem total"></th>
+        </tr>
+    </template>
     <script src="app.js"></script>
 </body>
 

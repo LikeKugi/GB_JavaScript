@@ -36,6 +36,10 @@ body {
     color: #e8e8e8;
 }
 
+.rightHeader {
+    position: relative;
+}
+
 .userIcon,
 .cartIcon {
     display: none;
@@ -76,6 +80,31 @@ body {
     top: -19px;
     font-size: 12px;
     line-height: 19px;
+}
+
+#cartQty {
+    visibility: hidden;
+}
+
+.cartItems {
+    position: absolute;
+    top: 200%;
+    right: 0%;
+    background-color: #e1e1e1;
+    padding: 15px;
+    z-index: 99;
+}
+
+.cartItems table {
+    border-collapse: collapse;
+}
+
+.trow {
+    border-bottom: 1px solid #000;
+}
+
+.titem {
+    padding: 5px 15px 10px;
 }
 
 .newArrivals {
