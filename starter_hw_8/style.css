@@ -87,12 +87,17 @@ body {
 }
 
 .cartItems {
+    display: block;
     position: absolute;
     top: 200%;
     right: 0%;
     background-color: #e1e1e1;
     padding: 15px;
     z-index: 99;
+}
+
+.none {
+    display: none !important;
 }
 
 .cartItems table {

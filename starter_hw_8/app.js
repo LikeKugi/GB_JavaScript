@@ -31,10 +31,75 @@ filterSizeWrap.addEventListener("click", function () {
 
 // -----------------------------------------------------------
 
-const supplies = {};
+class Supply {
+  constructor(name, ID, price) {
+    this.name = name;
+    this.ID = ID;
+    this.price = price;
+  }
+}
+
+class Cart {
+  constructor(elem) {
+    this._elem = document.querySelector(elem);
+    this._cart = {};
+  }
+  check(id) {
+    return Object.keys(this._cart).includes(id);
+  }
+  push(val, qty) {
+    let id = val.ID;
+    this._cart[id] = {
+      ...val,
+      quantity: qty,
+    };
+  }
+  change(id, qty = 1) {
+    this._cart[id].quantity += qty;
+    if (this._cart[id].quantity === 0) {
+      delete this._cart[id];
+    }
+  }
+  toRow() {
+    let out = "";
+    for (let id in this._cart) {
+      const el = this._cart[id];
+      out += `<tr>
+      <td class="titem">${el.name}</td>
+      <td class="titem">${+el.quantity}</td>
+      <td class="titem">\$${el.price}</td>
+      <td class="titem">\$${el.quantity * el.price}</td>
+      </tr>`;
+    }
+    this._elem.querySelector("tbody").innerHTML = out;
+    return out;
+  }
+  get totalPrice() {
+    let total = 0;
+    for (let id in this._cart) {
+      const el = this._cart[id];
+      total += el.quantity * el.price;
+    }
+    this._elem.querySelector("#total").textContent = total;
+    return total;
+  }
+
+  get quantity() {
+    let total = 0;
+    for (let id in this._cart) {
+      const el = this._cart[id];
+      total += el.quantity;
+    }
+    return total;
+  }
+}
+
+const supplies = new Cart("#cartBox");
 const featuredItems = document.querySelector(".featuredItems");
 const cartQty = document.querySelector("#cartQty");
 const cartIconEl = document.querySelector(".cartIconWrap");
+const boxTemplate = document.querySelector("#cartBox");
+const wrapper = document.querySelector(".cartItems");
 
 featuredItems.addEventListener("click", (event) => {
   if (!event.target.classList.contains("featuredBtnAdd")) {
@@ -48,64 +113,25 @@ featuredItems.addEventListener("click", (event) => {
     .replace(/\$/, "");
   const name = item.querySelector(".featuredName").textContent.trim();
 
-  if (supplies[supplyID]) {
-    supplies[supplyID].quantity += 1;
+  console.log(supplyID);
+
+  if (supplies.check(supplyID)) {
+    supplies.change(supplyID);
   } else {
-    supplies[supplyID] = {
-      name,
-      price,
-      quantity: 1,
-    };
+    const item = new Supply(name, supplyID, price);
+    supplies.push(item, 1);
   }
 
-  // console.log(supplies);
-  countSupplies();
+  supplies.toRow();
+  supplies.totalPrice;
+  countSupplies(supplies.quantity);
 });
 
-function countSupplies() {
-  let sum = 0;
-  let qty = 0;
-  for (const id in supplies) {
-    const supply = supplies[id];
-    // console.log(supply);
-    qty += supply.quantity;
-    sum += supply.price * supply.quantity;
-  }
-  // console.log(`sum = ${sum}; qty = ${qty}`);
+function countSupplies(qty) {
   cartQty.style.visibility = qty ? "visible" : "hidden";
   cartQty.textContent = qty;
 }
 
-const boxTemplate = document.querySelector("#cartBox");
-const rowTemplate = document.querySelector("#cartRow");
-const wrapper = document.querySelector(".rightHeader");
-
 cartIconEl.addEventListener("click", () => {
-  if (Object.keys(supplies).length && !wrapper.querySelector(".cartItems")) {
-    console.log(supplies);
-    makeCart();
-  }
+  wrapper.classList.toggle("none");
 });
-
-function makeCart() {
-  const box = boxTemplate.content.cloneNode(true);
-  let TOTAL = 0;
-  for (const ID in supplies) {
-    const supply = supplies[ID];
-    console.log(supply);
-    const clone = rowTemplate.content.cloneNode(true);
-    const name = clone.querySelector(".name");
-    name.textContent = supply.name;
-    const quantity = clone.querySelector(".quantity");
-    quantity.textContent = supply.quantity;
-    const price = clone.querySelector(".price");
-    price.textContent = "$" + supply.price;
-    const total = clone.querySelector(".total");
-    total.textContent = "$" + +supply.price * +supply.quantity;
-    TOTAL += +supply.price * +supply.quantity;
-    console.log(clone);
-    box.querySelector("tbody").append(clone);
-  }
-  box.querySelector("#total").textContent = TOTAL;
-  wrapper.append(box);
-}
