@@ -1,0 +1,31 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+.page{
+  &-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  &-content {
+    flex-grow: 1;
+  }
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 1.5rem;
+}
+.row {
+  display: flex;
+  margin: -1rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: block;
+  padding: 1rem 2rem;
+  cursor: pointer;
+}

@@ -1,0 +1,11 @@
+.header {
+  padding: 1rem -0px;
+  border-bottom: 1px solid $gray-light;
+  &__row {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__btn {
+    font-size: 1.4rem;
+  }
+}

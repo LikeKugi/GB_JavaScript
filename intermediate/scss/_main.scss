@@ -1,0 +1,18 @@
+.main {
+  padding-top: 3rem;
+  @include txt-norm(1.5rem);
+}
+
+.goods {
+  &-wrap {
+    width: 25%;
+    padding: 1rem;
+  }
+  &-list {
+  }
+  &-item {
+    padding: 2rem 1.5rem;
+    border: 2px solid $gray-light;
+    border-radius: 2rem;
+  }
+}
