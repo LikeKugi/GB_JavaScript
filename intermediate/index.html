@@ -7,16 +7,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
     <title>eShop | JavaScript Intermediate Course GB</title>
 </head>
 <body>
-<div class="page-container">
+<div class="page-container" id="root">
 
     <header class="header">
         <div class="container">
             <div class="header__row">
                 <h1 class="title header__title">E-Shop</h1>
-                <button class="btn header__btn cart-button" type="button">Корзина</button>
+                <label for="search" style="visibility: hidden">Поиск</label>
+                <input type="text" name="search" id="search" v-model="searchLine">
+                <button class="btn header__btn cart-button" type="button" @click="toggleCart()">Корзина</button>
             </div>
         </div>
     </header>
@@ -24,13 +27,35 @@
     <div class="page-content">
         <main class="main">
             <div class="container">
-                <div class="row goods-list"></div>
+                <div class="row goods-list">
+                    <div class="goods-wrap" v-for="item in filteredGoods">
+                        <div class="goods-item" >
+                            <h3>{{ item.product_name }}</h3>
+                            <p>{{ item.price }}</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
     </div>
 
-    <footer class="footer"></footer>
+    <div class="cart" v-show="isVisibleCart">
+        <button class="cart-close" type="button" @click="toggleCart()">x</button>
+        <div class="row">
+            <div class="cart-wrap">
+                <div class="cart-item">
+                    <h3></h3>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">total: {{ calculatePrice }}</div>
+    </footer>
 </div>
+
 <script src="js/script.js"></script>
 </body>
 </html>

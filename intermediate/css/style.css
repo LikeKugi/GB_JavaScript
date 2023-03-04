@@ -16,6 +16,7 @@ html, input, button {
 }
 
 .page-container {
+  position: relative;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -69,6 +70,29 @@ html, input, button {
   padding: 2rem 1.5rem;
   border: 2px solid #c2c2c2;
   border-radius: 2rem;
+}
+
+.cart {
+  display: block;
+  position: absolute;
+  top: 20%;
+  left: 30%;
+  min-width: 768px;
+  min-height: 200px;
+  height: 500px;
+  border: 2px solid #212121;
+  background-color: #e2e2e2;
+}
+.cart-wrap {
+  padding: 1rem;
+}
+.cart-item {
+  padding: 2rem 1.5rem;
+  border: 2px solid #c2c2c2;
+  border-radius: 2rem;
+}
+.cart-close {
+  padding: 20px;
 }
 
 /*# sourceMappingURL=style.css.map */
