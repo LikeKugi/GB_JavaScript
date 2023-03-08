@@ -8,6 +8,14 @@ const BASE_URL = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-st
 const GET_GOODS_ITEMS = `${BASE_URL}/catalogData.json`;
 const GET_GOODS_BASKET_ITEMS = `${BASE_URL}/getBasket.json`;
 
+Vue.component('search', {
+    template:
+        `<div class="box-search">
+<label for="search" style="visibility: hidden">Поиск</label>
+<input type="text" name="search" id="search" v-model="searchLine">
+</div>`
+})
+
 const app = new Vue({
     el: '#root',
     data: {
@@ -49,43 +57,3 @@ const app = new Vue({
     }
 });
 
-
-
-
-
-class GoodsItem {
-    _price;
-    _title;
-    constructor({title, price}) {
-        this._title = title;
-        this._price = price;
-    }
-    render() {
-        return `<div class="goods-wrap"><div class="goods-item"><h3>${this._title}</h3><p>${this._price}</p></div></div>`;
-    }
-}
-
-class GoodsList {
-    constructor() {
-        this._goods = [];
-    }
-    fetchGoods() {
-        this._goods = [...goods];
-    }
-    render(elem='.goods-list') {
-        const wrapper = document.querySelector(elem);
-        wrapper.innerHTML = this._goods.map(el => {
-            const item = new GoodsItem({...el});
-            return  item.render();
-        }).join('');
-    }
-
-    totalPrice() {
-        return this._goods.reduce((a, item) => a + item.price, 0)
-    }
-}
-
-// const supplies = new GoodsList;
-// supplies.fetchGoods();
-// supplies.render();
-// console.log(supplies.totalPrice());
